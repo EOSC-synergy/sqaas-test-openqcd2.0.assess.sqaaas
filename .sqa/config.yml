@@ -1,0 +1,47 @@
+config:
+  credentials:
+  - id: sqaaas_tmp_cred-gimpy-olive-dachshund
+    password_var: GIT_PASSWORD
+    username_var: GIT_USER
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/1.7.11
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/gray95/sqaas-test-openqcd2.0:
+      branch: main
+      credential_tmp: true
+      credentials_id: sqaaas_tmp_cred-gimpy-olive-dachshund
+      repo: https://github.com/gray95/sqaas-test-openqcd2.0
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/gray95/sqaas-test-openqcd2.0 git:
+        commands:
+        - /usr/bin/env sh .sqa/script.jumpy-salmon-dog.sh
+        container: qc.acc_stealthy-chocolate-sponge
+  QC.Doc:
+    repos:
+      github.com/gray95/sqaas-test-openqcd2.0 find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.leaky-peach-collie.sh
+        container: qc.doc_sleazy-silver-badger
+      github.com/gray95/sqaas-test-openqcd2.0 git:
+        commands:
+        - /usr/bin/env sh .sqa/script.beady-fuchsia-oyster.sh
+        container: qc.doc_lousy-champagne-impala
+  QC.Lic:
+    repos:
+      github.com/gray95/sqaas-test-openqcd2.0 licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.gimpy-persimmon-lynx.sh
+        container: qc.lic_homely-champagne-skunk
+  QC.Ver:
+    repos:
+      github.com/gray95/sqaas-test-openqcd2.0 get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.hasty-azure-barnacle.sh
+        container: qc.ver_sleepy-chestnut-setter
+timeout: 5400
